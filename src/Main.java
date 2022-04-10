@@ -14,10 +14,28 @@ public class Main {
             switch (userChoice){
                 case 1:
                     store.createUser();
-
                     break;
                 case 2:
-
+                    System.out.println("Do want tos sign-in as 1.Client\n 2.Employee");
+                    int inputUser=scanner.nextInt();
+                    switch (inputUser){
+                        case 1:
+                            Client clientUser= store.clientLogin();
+                            if (clientUser == null){
+                                System.out.println("Wrong credentials!");
+                            }else {
+                                System.out.println("You Log-in as client");
+                            }
+                            break;
+                        case 2:
+                            Employee employeeUser= store.employeeLogin();
+                            if (employeeUser==null){
+                                System.out.println("Wrong credentials!");
+                            }else {
+                                System.out.println("You Log-in as employee");
+                            }
+                            break;
+                    }
                     break;
                 case 3:
                     break;
