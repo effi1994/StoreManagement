@@ -12,4 +12,12 @@ public class Client extends  User {
     public void setMemberShip(boolean memberShip) {
         this.memberShip = memberShip;
     }
+
+    /*public  boolean equals(Client other){
+        boolean equals=false;
+        if ((this.getUserName().equals(other.getUserName()))){
+            equals=true;
+        }
+        return equals;
+    }*/
 }

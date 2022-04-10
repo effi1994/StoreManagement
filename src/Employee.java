@@ -13,4 +13,6 @@ public class Employee extends User{
   public void setEmployeeLevel(Attribute employeeLevel) {
     EmployeeLevel = employeeLevel;
   }
+
+
 }

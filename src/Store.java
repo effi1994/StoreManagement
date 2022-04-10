@@ -20,6 +20,7 @@ public class Store {
     public void  createUser (){
         boolean nameNotNumbers=false;
         boolean strongPassword =false;
+        boolean userNameTaken=false;
         Scanner scanner = new Scanner(System.in);
         String lastname = null ;
         String firstName= null ;
@@ -28,8 +29,8 @@ public class Store {
 
 
             System.out.println("Which access you want to create Employee or Client?\n" +
-                    "1.Create Employee\n" +
-                    "2.Create Client ");
+                    "1.Create Client\n" +
+                    "2.Create Employee ");
             int inputUser = scanner.nextInt();
 
             switch (inputUser){
@@ -45,14 +46,74 @@ public class Store {
                         lastname=scanner.next();
                         nameNotNumbers=this.checkIfTheNameIsNotNum(lastname);
                     }while (nameNotNumbers);
+                    do{
+                        System.out.println("Enter username:");
+                        userName = scanner.next();
+                        userNameTaken = this.doesClientUserNameExist(userName);
+                    }while(userNameTaken);
+
                     do {
                         System.out.println("Enter Pass for the user");
                         password = scanner.next();
                         strongPassword = this.checkIfStrongPassword(password);
                     }while (!strongPassword);
+
+                    System.out.println("Are you Membership of our company ?");
+                    String answer=scanner.next();
+                    boolean memberShip =false;
+                    if (answer.equals("yes")){
+                       memberShip=true;
+                    }
+                    Client newClient= new Client(userName,password,lastname,firstName,memberShip);
+                    clients.add(newClient);
                     break;
                 case 2:
-                    break;
+                    Attribute typeOfEmployee=null;
+                    do {
+                        System.out.println("Enter first name: ");
+                        firstName = scanner.next();
+                        nameNotNumbers=this.checkIfTheNameIsNotNum(firstName);
+                    }while (nameNotNumbers);
+
+                    do {
+                        System.out.println("Enter LastName");
+                        lastname=scanner.next();
+                        nameNotNumbers=this.checkIfTheNameIsNotNum(lastname);
+                    }while (nameNotNumbers);
+                    do{
+                        System.out.println("Enter username:");
+                        userName = scanner.next();
+                        userNameTaken = this.doesClientUserNameExist(userName);
+                    }while(userNameTaken);
+
+                    do {
+                        System.out.println("Enter Pass for the user");
+                        password = scanner.next();
+                        strongPassword = this.checkIfStrongPassword(password);
+                    }while (!strongPassword);
+                    System.out.println("Wich kind of user are you\n" +
+                            "(1.REGULAREMPLOYEE,\n" +
+                            " 2.MANGER,\n" +
+                            "  3.MEMEBROFMANGEMENTTEAM)");
+
+                   int userLevel=scanner.nextInt();
+
+
+                    switch (userLevel){
+                        case 1:
+                            typeOfEmployee=Attribute.REGULAREMPLOYEE;
+                            break;
+                        case 2:
+                            typeOfEmployee=Attribute.MANGER;
+                            break;
+                        case 3:
+                            typeOfEmployee = Attribute.MEMEBROFMANGEMENTTEAM;
+                            break;
+                    }
+                   Employee newEmployee= new Employee(userName,password,lastname,firstName,typeOfEmployee);
+                    employees.add(newEmployee);
+
+                 break;
             }
 
     }
@@ -70,10 +131,10 @@ public class Store {
         return false;
     }
     private  boolean checkIfStrongPassword(String password){
-       boolean strong = false;
-       if (password.length()>= 6){
-           strong = true;
-
+       boolean strong = true;
+       if (password.length()< 6){
+           strong = false;
+           System.out.println("The password need to be at least 6 notes");
        }
        return strong;
     }
