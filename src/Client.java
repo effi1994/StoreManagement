@@ -13,11 +13,10 @@ public class Client extends  User {
         this.memberShip = memberShip;
     }
 
-    /*public  boolean equals(Client other){
-        boolean equals=false;
-        if ((this.getUserName().equals(other.getUserName()))){
-            equals=true;
-        }
-        return equals;
-    }*/
+    @Override
+    public String toString(){
+        return "Hello"  + " { " + this.getFirstName() + " } "  + " { " + this.getLastName() + " } "
+                + (this.isMemberShip() ? " (VIP)! ":" ! ");
+
+    }
 }

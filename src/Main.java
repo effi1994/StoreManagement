@@ -24,7 +24,7 @@ public class Main {
                             if (clientUser == null){
                                 System.out.println("Wrong credentials!");
                             }else {
-                                System.out.println("You Log-in as client");
+                                System.out.println(clientUser);
                             }
                             break;
                         case 2:

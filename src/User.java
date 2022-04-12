@@ -3,7 +3,24 @@ import com.sun.imageio.stream.StreamFinalizer;
 public class User {
   private String userName;
   private String password;
-  private String lastName;
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    private String lastName;
   private String firstName;
  // private Employee employee;
 

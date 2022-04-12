@@ -14,5 +14,9 @@ public class Employee extends User{
     EmployeeLevel = employeeLevel;
   }
 
-
+  @Override
+  public String toString(){
+    return "Hello"  + " { " + this.getFirstName() + " } "  + " { " + this.getLastName() + " } "
+            + this.getEmployeeLevel();
+  }
 }
