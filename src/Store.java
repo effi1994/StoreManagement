@@ -138,4 +138,67 @@ public class Store {
        }
        return strong;
     }
+    private boolean doesClientUserNameExist(String usernameToCheck) {
+        boolean exitsClient = false;
+        boolean  exitsEmployee =false;
+            for (Client currentUser : this.clients) {
+                if (currentUser.getUserName().equals(usernameToCheck)) {
+                    exitsClient = true;
+                    System.out.println("This user name exist please choose another 1");
+                    break;
+                }
+            }
+
+            for (Employee currentUser : this.employees) {
+                if (currentUser.getUserName().equals(usernameToCheck)) {
+                    exitsEmployee = true;
+                    System.out.println("This user name exist please choose another 1");
+                    break;
+                }
+            }
+
+        return exitsEmployee||exitsClient;
+    }
+
+    public Client clientLogin(){
+        Scanner scanner = new Scanner(System.in);
+        String userName = null;
+        String password = null;
+        Client userClient=null;
+        System.out.println("Enter your username");
+        userName=scanner.next();
+        System.out.println("Enter your password");
+        password=scanner.next();
+        for (Client currentRegister : this.clients) {
+            if (currentRegister.getUserName().equals(userName)
+                    && currentRegister.getPassword().equals(password)) {
+                        userClient = currentRegister;
+                        break;
+                    }
+                }
+                return userClient;
+    }
+
+
+    public Employee employeeLogin() {
+        Scanner scanner = new Scanner(System.in);
+        String userName = null;
+        String password = null;
+        Employee userEmployee = null;
+        System.out.println("Enter your username");
+        userName=scanner.next();
+        System.out.println("Enter your password");
+        password=scanner.next();
+        for (Employee currentRegister : this.employees) {
+            if (currentRegister.getUserName().equals(userName) &&
+                    currentRegister.getPassword().equals(password)) {
+                userEmployee = currentRegister;
+                break;
+            }
+        }
+        return userEmployee;
+    }
+
+
+
 }
