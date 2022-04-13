@@ -4,7 +4,7 @@ public class Product {
     private boolean inventory;
     private int productAmount;
 
-    public Product (String nameProduct, int idProduct,boolean inventory,int productAmount){
+    public Product (String nameProduct, int idProduct,boolean inventory,int productAmount ,int price,float discountPrice,int selectedProduct){
         this.nameProduct = nameProduct;
         this.idProduct = idProduct;
         this.inventory = inventory;
@@ -16,7 +16,7 @@ public class Product {
     public String toString(){
 
         return (this.isInventory()? "Name: " + this.getNameProduct() + "\n" +
-                "Product: "  + this.getProductAmount() : "out of inventory");
+                "ProductID: "  + this.getIdProduct() : "out of inventory");
 
     }
     public int getProductAmount() {
@@ -52,9 +52,30 @@ public class Product {
         this.inventory = inventory;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public float getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(float discountPrice) {
+        this.discountPrice = discountPrice/Finals.PERCENTAGE;
+    }
+
+    public int getSelectedProduct() {
+        return selectedProduct;
+    }
+
     public void inventoryUpdate (int customerAmount){
         if (this.productAmount > 0){
             if ( this.productAmount >=customerAmount){
+                this.selectedProduct = customerAmount;
                 this.productAmount -= customerAmount;
             }
         }else {

@@ -24,7 +24,9 @@ public class Main {
                             if (clientUser == null){
                                 System.out.println("Wrong credentials!");
                             }else {
-                                System.out.println(clientUser);
+                                System.out.println(clientUser + "\n");
+                                store.purchase(clientUser);
+
                             }
                             break;
                         case 2:

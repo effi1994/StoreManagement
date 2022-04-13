@@ -8,14 +8,23 @@ import java.util.Scanner;
 public class Store {
  private LinkedList<Client> clients;
  private  LinkedList<Employee> employees;
- private ArrayList<ShoppingCart>shoppingCarts;
  private ArrayList<Product> products;
 
     public Store() {
         this.clients = new LinkedList<>() ;
         this.employees = new LinkedList<>();
-        this.shoppingCarts = new ArrayList<>();
         this.products = new ArrayList<>();
+        Product product1=new Product("milk",
+                0001,true,10,
+                5,0,0);
+        Product product2=new Product(" Turkish-Coffe",
+                0002,true,5,
+                5,2,0);
+        Product product3 = new Product("Arak",0003,
+                true,10,100,0, 0);
+        this.products.add(product1);
+        this.products.add(product2);
+        this.products.add(product3);
     }
     public void  createUser (){
         boolean nameNotNumbers=false;
