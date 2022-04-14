@@ -9,6 +9,7 @@ public class Store {
  private LinkedList<Client> clients;
  private  LinkedList<Employee> employees;
  private ArrayList<Product> products;
+ private Integer indexProduct=null;
 
     public Store() {
         this.clients = new LinkedList<>() ;
@@ -73,7 +74,7 @@ public class Store {
                     if (answer.equals("yes")){
                        memberShip=true;
                     }
-                    Client newClient= new Client(userName,password,lastname,firstName,memberShip);
+                    Client newClient= new Client(userName,password,lastname,firstName,memberShip,null);
                     clients.add(newClient);
                     break;
                 case 2:
@@ -119,7 +120,7 @@ public class Store {
                             typeOfEmployee = Attribute.MEMEBROFMANGEMENTTEAM;
                             break;
                     }
-                   Employee newEmployee= new Employee(userName,password,lastname,firstName,typeOfEmployee);
+                   Employee newEmployee= new Employee(userName,password,lastname,firstName,typeOfEmployee,null);
                     employees.add(newEmployee);
 
                  break;

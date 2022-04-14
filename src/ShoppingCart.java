@@ -54,6 +54,9 @@ public class ShoppingCart {
                 this.totalPrice += sum - (this.products.get(i).getPrice()
                         *this.products.get(i).getDiscountPrice()
                         *this.products.get(i).getSelectedProduct());
+                System.out.println(this.getProducts().get(i) + "\n"
+                        + this.getProducts().get(i).getSelectedProduct() + "\n"
+                        + this.totalPrice);
             }
         }else {
             this.totalPrice=this.totalPrice();
@@ -83,7 +86,12 @@ public class ShoppingCart {
             this.totalPrice += this.products.get(i).getPrice()
                     *this.products.get(i).getDiscountPrice()
                     *this.products.get(i).getSelectedProduct();
+                   System.out.println(this.getProducts().get(i) + "\n"
+                    + this.getProducts().get(i).getSelectedProduct() + "\n"
+                    + this.totalPrice);
         }
         return this.totalPrice;
     }
+
+
 }

@@ -72,10 +72,15 @@ public class Product {
         return selectedProduct;
     }
 
-    public void inventoryUpdate (int customerAmount){
+    public void setSelectedProduct(int selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+
+    public Product inventoryUpdate (int customerAmount, Product product){
         if (this.productAmount > 0){
             if ( this.productAmount >=customerAmount){
                 this.selectedProduct = customerAmount;
+                product.setSelectedProduct(this.selectedProduct);
                 this.productAmount -= customerAmount;
             }
         }else {
@@ -83,5 +88,9 @@ public class Product {
             System.out.println("This Item is out of stock!!!!");
         }
 
+     return product;
     }
+
+
+
 }
