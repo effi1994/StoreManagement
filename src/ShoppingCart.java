@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ShoppingCart {
@@ -5,6 +7,7 @@ public class ShoppingCart {
     private String lastDatePurchase;
     private int amountOfPurchase;
     private float totalPrice;
+
 
     public ShoppingCart (String lastDatePurchase,int amountOfPurchase,float totalPrice ){
 
@@ -14,12 +17,21 @@ public class ShoppingCart {
         this.products= new ArrayList<>();
     }
 
+    public ShoppingCart(){
+        this.products=new ArrayList<>();
+    }
+
+
+
     public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setProducts(Product product) {
+        if (!this.checkDoubleOfProducts(product)){
+            this.products.add(product);
+        }
+
     }
 
     public String getLastDatePurchase() {
@@ -47,17 +59,22 @@ public class ShoppingCart {
     }
 
     public float totalPriceClient(boolean isMemberShip) {
+        float total=0;
+        this.setTotalPrice(0);
         if (isMemberShip){
             for (int i = 0; i < this.getProducts().size(); i++) {
+                float totalProduct=0;
                 float sum = this.products.get(i).getPrice()
                         *this.products.get(i).getSelectedProduct();
-                this.totalPrice += sum - (this.products.get(i).getPrice()
-                        *this.products.get(i).getDiscountPrice()
-                        *this.products.get(i).getSelectedProduct());
+                total += sum - (sum *this.products.get(i).getDiscountPrice());
+                totalProduct=total;
                 System.out.println(this.getProducts().get(i) + "\n"
                         + this.getProducts().get(i).getSelectedProduct() + "\n"
-                        + this.totalPrice);
+                        + "price: "  + totalProduct);
             }
+            this.setTotalPrice(total);
+            System.out.println("This total price of Products : " + this.getTotalPrice());
+
         }else {
             this.totalPrice=this.totalPrice();
         }
@@ -82,15 +99,34 @@ public class ShoppingCart {
     }
 
     public float totalPrice(){
+        int total=0;
+        this.setTotalPrice(0);
         for (int i = 0; i < this.getProducts().size(); i++) {
-            this.totalPrice += this.products.get(i).getPrice()
-                    *this.products.get(i).getDiscountPrice()
-                    *this.products.get(i).getSelectedProduct();
+             total+=this.products.get(i).getPrice()
+                     *this.products.get(i).getSelectedProduct();
                    System.out.println(this.getProducts().get(i) + "\n"
-                    + this.getProducts().get(i).getSelectedProduct() + "\n"
-                    + this.totalPrice);
+                    + this.getProducts().get(i).getSelectedProduct());
         }
-        return this.totalPrice;
+        this.setTotalPrice(total);
+        System.out.println(this.getTotalPrice());
+        return this.getTotalPrice();
+    }
+
+    public boolean checkDoubleOfProducts(Product product){
+        boolean isExist=false;
+        for (int i = 0; i < this.getProducts().size(); i++) {
+            if (this.getProducts().get(i).getIdProduct()==product.getIdProduct()){
+                isExist = true;
+                break;
+            }
+        }
+        return isExist;
+    }
+
+    public String setNewTheLastDatePurchase(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 
 

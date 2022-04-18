@@ -12,7 +12,7 @@ public class User {
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.shoppingCart=null;
+        this.shoppingCart=shoppingCart;
     }
 
 
@@ -32,8 +32,15 @@ public class User {
         this.firstName = firstName;
     }
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
 
- // private Employee employee;
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+// private Employee employee;
 
 
 

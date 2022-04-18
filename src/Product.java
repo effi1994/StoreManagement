@@ -77,18 +77,30 @@ public class Product {
     }
 
     public Product inventoryUpdate (int customerAmount, Product product){
-        if (this.productAmount > 0){
-            if ( this.productAmount >=customerAmount){
-                this.selectedProduct = customerAmount;
-                product.setSelectedProduct(this.selectedProduct);
-                this.productAmount -= customerAmount;
+        if (this.getProductAmount() > 0){
+            if ( this.getProductAmount() >=customerAmount){
+                this.setSelectedProduct(this.getSelectedProduct() + customerAmount);
+                product.setSelectedProduct(this.getSelectedProduct());
+                this.setProductAmount(this.getProductAmount()-customerAmount);
+                if (this.getProductAmount()==0){
+                    this.setInventory(false);
+                    System.out.println("you took the last product ");
+                }
             }
-        }else {
-            this.setInventory(false);
-            System.out.println("This Item is out of stock!!!!");
         }
 
      return product;
+    }
+
+    public boolean maxProductAmount(int customerAmount){
+        boolean between = true;
+        if (this.getProductAmount() < customerAmount){
+             between = false;
+        }
+        System.out.println(between?
+                "This is the amount that remaining from this product : " + this.getProductAmount() :
+                "you cannot get more this item : " + this.getProductAmount());
+        return between;
     }
 
 

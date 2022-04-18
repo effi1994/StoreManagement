@@ -13,6 +13,8 @@ public class Client extends  User {
         this.memberShip = memberShip;
     }
 
+
+
     @Override
     public String toString(){
         return "Hello"  + " { " + this.getFirstName() + " } "  + " { " + this.getLastName() + " } "

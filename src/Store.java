@@ -209,6 +209,11 @@ public class Store {
         return userEmployee;
     }
 
+    public Integer getIndexProduct() {
+        return indexProduct;
+    }
 
-
+    public void setIndexProduct(Integer indexProduct) {
+        this.indexProduct = indexProduct;
+    }
 }
