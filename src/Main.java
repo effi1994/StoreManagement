@@ -39,7 +39,7 @@ public class Main {
                                 if (employeeUser == null) {
                                     System.out.println("Wrong credentials!");
                                 } else {
-                                    System.out.println(employeeUser + "\n");
+                                    System.out.println(employeeUser + "\n+");
                                     store.menuEmployee(employeeUser);
                                 }
                                 break;
