@@ -7,7 +7,7 @@ public class User {
   private String firstName;
   private  ShoppingCart shoppingCart;
   private float oldBill;
-
+//
     public User(String userName, String password, String lastName, String firstName,ShoppingCart shoppingCart,float oldBill) {
         this.userName = userName;
         this.password = password;
