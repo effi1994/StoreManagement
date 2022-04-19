@@ -40,6 +40,7 @@ public class Main {
                                     System.out.println("Wrong credentials!");
                                 } else {
                                     System.out.println(employeeUser + "\n");
+                                    store.menuEmployee(employeeUser);
                                 }
                                 break;
                         }
