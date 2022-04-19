@@ -1,7 +1,7 @@
 public class Client extends  User {
   private boolean memberShip;
-    public Client(String userName, String password, String lastName, String firstName, boolean memberShip ,ShoppingCart shoppingCart) {
-        super(userName, password, lastName, firstName,shoppingCart);
+    public Client(String userName, String password, String lastName, String firstName, boolean memberShip ,ShoppingCart shoppingCart,float oldBill) {
+        super(userName, password, lastName, firstName,shoppingCart,oldBill);
         this.memberShip = memberShip;
     }
 

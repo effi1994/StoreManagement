@@ -6,8 +6,9 @@ public class User {
   private String lastName;
   private String firstName;
   private  ShoppingCart shoppingCart;
+  private float oldBill;
 
-    public User(String userName, String password, String lastName, String firstName,ShoppingCart shoppingCart) {
+    public User(String userName, String password, String lastName, String firstName,ShoppingCart shoppingCart,float oldBill) {
         this.userName = userName;
         this.password = password;
         this.lastName = lastName;
@@ -59,4 +60,14 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public float getOldBill() {
+        return oldBill;
+    }
+
+    public void setOldBill(float oldBill) {
+        this.oldBill += oldBill;
+    }
+
+
 }

@@ -3,12 +3,18 @@ public class Product {
     private int idProduct;
     private boolean inventory;
     private int productAmount;
+    private  int price;
+    private float discountPrice;
+    private int selectedProduct;
 
     public Product (String nameProduct, int idProduct,boolean inventory,int productAmount ,int price,float discountPrice,int selectedProduct){
         this.nameProduct = nameProduct;
         this.idProduct = idProduct;
         this.inventory = inventory;
         this.productAmount = productAmount;
+        this.price= price;
+        this.discountPrice = discountPrice/Finals.PERCENTAGE;
+        this.selectedProduct=0;
     }
 
 

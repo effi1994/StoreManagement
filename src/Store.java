@@ -74,7 +74,7 @@ public class Store {
                     if (answer.equals("yes")){
                        memberShip=true;
                     }
-                    Client newClient= new Client(userName,password,lastname,firstName,memberShip,null);
+                    Client newClient= new Client(userName,password,lastname,firstName,memberShip,null,0);
                     clients.add(newClient);
                     break;
                 case 2:
@@ -120,7 +120,7 @@ public class Store {
                             typeOfEmployee = Attribute.MEMEBROFMANGEMENTTEAM;
                             break;
                     }
-                   Employee newEmployee= new Employee(userName,password,lastname,firstName,typeOfEmployee,null);
+                   Employee newEmployee= new Employee(userName,password,lastname,firstName,typeOfEmployee,null,0);
                     employees.add(newEmployee);
 
                  break;
@@ -208,6 +208,70 @@ public class Store {
         }
         return userEmployee;
     }
+    public void purchase(Client client){
+
+        float totalPrice=0;
+        Scanner scanner = new Scanner(System.in);
+        ShoppingCart shoppingCartClient = new ShoppingCart();
+        int selectProduct;
+        do {
+            this.printProduct();
+            System.out.println("Select a Product \n" +
+                    "or insert -1 for exist the purchase ");
+            selectProduct = scanner.nextInt();
+            if (selectProduct >0){
+                if (this.checkIsExistProduct(selectProduct)){
+                        System.out.println("how much you want to buy from this product?");
+                        selectProduct = scanner.nextInt();
+                        if (products.get(this.getIndexProduct()).maxProductAmount(selectProduct)){
+                            shoppingCartClient.setProducts(products.get(indexProduct).inventoryUpdate(selectProduct, this.products.get(this.getIndexProduct())));
+                            totalPrice = shoppingCartClient.totalPriceClient(client.isMemberShip());
+                            client.setShoppingCart(shoppingCartClient);
+                        }
+                }
+            } else {
+                boolean exit = selectProduct != -1;
+                System.out.println(exit ? "insert only positive numbers":" End of shopping");
+            }
+
+        }while (selectProduct != -1);
+        shoppingCartClient.setLastDatePurchase(shoppingCartClient.setNewTheLastDatePurchase());
+        client.setShoppingCart(shoppingCartClient);
+        client.myOldBill(totalPrice);
+        client.getShoppingCart().resetProduct();
+        System.out.println("Total Shopping : " + totalPrice);
+
+    }
+
+
+
+    private void printProduct(){
+        for (Product product : this.products) {
+            if (product.isInventory()){
+                System.out.println(product);
+            }
+
+        }
+    }
+
+
+    private  boolean  checkIsExistProduct (int productId){
+        boolean isExist=false;
+        this.setIndexProduct(0);
+        int conterIndex=0;
+        for (Product product : this.products) {
+            if (product.getIdProduct() == productId) {
+                isExist = true;
+                break;
+            }
+            conterIndex++;
+            this.setIndexProduct(conterIndex);
+        }
+        System.out.println(isExist ?
+                "is exist" : "not exist");
+       return isExist;
+    }
+
 
     public Integer getIndexProduct() {
         return indexProduct;

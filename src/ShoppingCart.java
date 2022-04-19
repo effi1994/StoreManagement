@@ -66,8 +66,8 @@ public class ShoppingCart {
                 float totalProduct=0;
                 float sum = this.products.get(i).getPrice()
                         *this.products.get(i).getSelectedProduct();
+                totalProduct=sum - (sum *this.products.get(i).getDiscountPrice());
                 total += sum - (sum *this.products.get(i).getDiscountPrice());
-                totalProduct=total;
                 System.out.println(this.getProducts().get(i) + "\n"
                         + this.getProducts().get(i).getSelectedProduct() + "\n"
                         + "price: "  + totalProduct);
@@ -124,9 +124,17 @@ public class ShoppingCart {
     }
 
     public String setNewTheLastDatePurchase(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
+    }
+
+
+    public  void  resetProduct (){
+        for (int i = 0; i < this.getProducts().size(); i++) {
+            this.getProducts().get(i).setSelectedProduct(0);
+        }
+
     }
 
 
