@@ -280,4 +280,25 @@ public class Store {
     public void setIndexProduct(Integer indexProduct) {
         this.indexProduct = indexProduct;
     }
+
+
+    public void menuEmployee(Employee employee){
+        float totalPrice=0;
+        Scanner scanner = new Scanner(System.in);
+        ShoppingCart shoppingCartClient = new ShoppingCart();
+        int selectProduct=0;
+        int inputEmployee=0;
+        do {
+            System.out.println("1-Print a list of all customers. \n" +
+                               "2-Print the list of customer members in the club only. \n" +
+                                "3-Print the list of customers who have made at least one purchase. \n" +
+                                "4-Print the customer whose purchase amount is the highest. \n" +
+                                 "5-Adding a new product to the store. \n" +
+                                 "6-Change inventory status for product. \n " +
+                                 "7-Making a purchase. \n" +
+                                 "8- Exit");
+            inputEmployee = scanner.nextInt();
+
+        }while (inputEmployee !=8);
+    }
 }
