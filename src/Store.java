@@ -281,7 +281,7 @@ public class Store {
         this.indexProduct = indexProduct;
     }
 
-
+//
     public void menuEmployee(Employee employee){
         float totalPrice=0;
         Scanner scanner = new Scanner(System.in);

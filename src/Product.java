@@ -57,7 +57,7 @@ public class Product {
 
         this.inventory = inventory;
     }
-
+//
     public int getPrice() {
         return price;
     }

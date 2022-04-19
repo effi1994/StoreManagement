@@ -5,7 +5,7 @@ public class Employee extends User{
     super(userName, password, lastName, firstName);
     EmployeeLevel = employeeLevel;
   }
-
+//
   public Attribute getEmployeeLevel() {
     return EmployeeLevel;
   }
