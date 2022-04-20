@@ -92,7 +92,7 @@ public class ShoppingCart {
                 break;
             case MEMEBROFMANGEMENTTEAM:
                 this.totalPrice= this.totalPrice()
-                        -(this.totalPrice()*Finals.MEMEBROFMANGEMENTTEAM);
+                        -(this.totalPrice()*Finals.MEMEBR_OF_MANGEMENT_TEAM);
                 break;
         }
         return this.totalPrice;

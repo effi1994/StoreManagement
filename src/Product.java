@@ -3,11 +3,11 @@ public class Product {
     private int idProduct;
     private boolean inventory;
     private int productAmount;
-    private  int price;
+    private  float price;
     private float discountPrice;
     private int selectedProduct;
 
-    public Product (String nameProduct, int idProduct,boolean inventory,int productAmount ,int price,float discountPrice,int selectedProduct){
+    public Product (String nameProduct, int idProduct,boolean inventory,int productAmount ,float price,float discountPrice,int selectedProduct){
         this.nameProduct = nameProduct;
         this.idProduct = idProduct;
         this.inventory = inventory;
@@ -58,7 +58,7 @@ public class Product {
         this.inventory = inventory;
     }
 //
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 

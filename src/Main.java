@@ -15,6 +15,7 @@ public class Main {
                 System.out.println("2 - Sign in");
                 System.out.println("3 - Exit");
 
+
                 userChoice = scanner.nextInt();
                 switch (userChoice) {
                     case 1:

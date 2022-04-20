@@ -13,6 +13,10 @@ public class Employee extends User{
   public void setEmployeeLevel(Attribute employeeLevel) {
     EmployeeLevel = employeeLevel;
   }
+  public void myOldBill(float totalPrice){
+    this.setOldBill(totalPrice);
+
+  }
 
   @Override
   public String toString(){

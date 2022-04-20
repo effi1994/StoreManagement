@@ -10,6 +10,7 @@ public class Store {
  private  LinkedList<Employee> employees;
  private ArrayList<Product> products;
  private Integer indexProduct=null;
+ private  Employee selectEmployee=null;
 
     public Store() {
         this.clients = new LinkedList<>() ;
@@ -27,6 +28,24 @@ public class Store {
         this.products.add(product2);
         this.products.add(product3);
     }
+
+
+    public Integer getIndexProduct() {
+        return indexProduct;
+    }
+
+    public void setIndexProduct(Integer indexProduct) {
+        this.indexProduct = indexProduct;
+    }
+
+    public Employee getSelectEmployee() {
+        return selectEmployee;
+    }
+
+    public void setSelectEmployee(Employee selectEmployee) {
+        this.selectEmployee = selectEmployee;
+    }
+
     public void  createUser (){
         boolean nameNotNumbers=false;
         boolean strongPassword =false;
@@ -212,7 +231,7 @@ public class Store {
 
         float totalPrice=0;
         Scanner scanner = new Scanner(System.in);
-        ShoppingCart shoppingCartClient = new ShoppingCart();
+        ShoppingCart shoppingCart = new ShoppingCart();
         int selectProduct;
         do {
             this.printProduct();
@@ -224,10 +243,20 @@ public class Store {
                         System.out.println("how much you want to buy from this product?");
                         selectProduct = scanner.nextInt();
                         if (products.get(this.getIndexProduct()).maxProductAmount(selectProduct)){
-                            shoppingCartClient.setProducts(products.get(indexProduct).inventoryUpdate(selectProduct, this.products.get(this.getIndexProduct())));
-                            totalPrice = shoppingCartClient.totalPriceClient(client.isMemberShip());
-                            client.setShoppingCart(shoppingCartClient);
+                            shoppingCart.setProducts(products.get(indexProduct).
+                                    inventoryUpdate(selectProduct, this.products.get(this.getIndexProduct())));
+                            if (client !=null){
+
+                                totalPrice = shoppingCart.totalPriceClient(client.isMemberShip());
+                                client.setShoppingCart(shoppingCart);
+                            }else {
+                                totalPrice = shoppingCart.totalPriceEmployee(this.getSelectEmployee().getEmployeeLevel());
+                                this.getSelectEmployee().setShoppingCart(shoppingCart);
+                            }
+
                         }
+                }else {
+                    System.out.println("not exist");
                 }
             } else {
                 boolean exit = selectProduct != -1;
@@ -235,11 +264,19 @@ public class Store {
             }
 
         }while (selectProduct != -1);
-        shoppingCartClient.setLastDatePurchase(shoppingCartClient.setNewTheLastDatePurchase());
-        client.setShoppingCart(shoppingCartClient);
-        client.myOldBill(totalPrice);
-        client.getShoppingCart().resetProduct();
-        System.out.println("Total Shopping : " + totalPrice);
+        shoppingCart.setLastDatePurchase(shoppingCart.setNewTheLastDatePurchase());
+        if (client!=null){
+            client.setShoppingCart(shoppingCart);
+            client.myOldBill(totalPrice);
+            client.getShoppingCart().resetProduct();
+            System.out.println("Total Shopping : " + totalPrice);
+        }else {
+            this.getSelectEmployee().setShoppingCart(shoppingCart);
+            this.getSelectEmployee().myOldBill(totalPrice);
+            this.getSelectEmployee().getShoppingCart().resetProduct();
+            System.out.println("Total Shopping : " + totalPrice);
+        }
+
 
     }
 
@@ -267,19 +304,11 @@ public class Store {
             conterIndex++;
             this.setIndexProduct(conterIndex);
         }
-        System.out.println(isExist ?
-                "is exist" : "not exist");
        return isExist;
     }
 
 
-    public Integer getIndexProduct() {
-        return indexProduct;
-    }
 
-    public void setIndexProduct(Integer indexProduct) {
-        this.indexProduct = indexProduct;
-    }
 
 //
     public void menuEmployee(Employee employee){
@@ -301,4 +330,77 @@ public class Store {
 
         }while (inputEmployee !=8);
     }
+
+    public void printClients(int inputEmployee){
+        int clientNumber = 1;
+        Client clientHighestRate = null;
+        for (Client client : this.clients) {
+            switch (inputEmployee) {
+                case Finals.PRINT_ALL_CLIENT:
+                    System.out.println(clientNumber + " : " + client);
+                    break;
+
+                case Finals.PRINT_MEMBERSHIP:
+                    if (client.isMemberShip()) {
+                        System.out.println(clientNumber + " : " + client);
+                    }
+                    break;
+
+
+                case Finals.PRINT_CLIENT_AT_LEAST_BUYING_ONE:
+                    if (client.getOldBill() >0){
+                        System.out.println(clientNumber + " : " + client);
+                    }
+                    break;
+                case Finals.PRINT_HIGHEST_PURCHASE:
+                    if (client.getOldBill() > clientHighestRate.getOldBill() || client.getOldBill() < clientHighestRate.getOldBill()){
+                        clientHighestRate=client;
+                    }
+                    break;
+            }
+            clientNumber++;
+        }
+        if (inputEmployee==Finals.PRINT_HIGHEST_PURCHASE)
+            System.out.println(clientHighestRate);
+
+    }
+
+    public void addNewProduct (){
+        Scanner scanner = new Scanner(System.in);
+        String nameProduct = "";
+        int idProduct =0;
+        int productAmount =0;
+        float price =0;
+        float discountPrice = 0;
+        System.out.println("enter name product :");
+        nameProduct = scanner.next();
+        System.out.println("enter id product :");
+        idProduct = scanner.nextInt();
+        System.out.println("enter product amount");
+        productAmount = scanner.nextInt();
+        System.out.println("enter price");
+        price = scanner.nextFloat();
+        System.out.println("enter discountPrice");
+        discountPrice = scanner.nextFloat();
+        Product newProduct = new Product(nameProduct,idProduct,
+                                true,productAmount,price,discountPrice,0);
+        this.products.add(newProduct);
+        System.out.println("add successfully");
+    }
+
+    public void  StatusInventory (){
+        int selectProduct=0;
+        String inventoryProduct = "";
+        Scanner scanner = new Scanner(System.in);
+
+        printProduct();
+        System.out.println("Select a Product id");
+        selectProduct=scanner.nextInt();
+        checkIsExistProduct(selectProduct);
+        System.out.println("enter if the product exist y/n");
+       inventoryProduct=scanner.next();
+       this.products.get(this.getIndexProduct()).setInventory(inventoryProduct.equals("y"));
+
+    }
+
 }
