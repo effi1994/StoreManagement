@@ -4,6 +4,8 @@ public class Client extends  User {
         super(userName, password, lastName, firstName,shoppingCart,oldBill);
         this.memberShip = memberShip;
     }
+
+
 ///
     public boolean isMemberShip() {
         return memberShip;

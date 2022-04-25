@@ -1,6 +1,6 @@
 public class Finals {
 //
-    public static final int PERCENTAGE = 100;
+    public static final float PERCENTAGE = 100;
     public  static final float EMPLOYEE = 10/PERCENTAGE;
     public  static final float MANGER = 20/PERCENTAGE;
     public  static final float MEMEBR_OF_MANGEMENT_TEAM = 30/PERCENTAGE;
@@ -11,4 +11,5 @@ public class Finals {
     public static final int ADD_PRODUCT = 5 ;
     public static final  int  STATUS_PRODUCT = 6;
     public static final  int PURCHASE = 7;
+
 }

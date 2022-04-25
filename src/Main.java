@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -50,8 +51,8 @@ public class Main {
                         break;
                 }
             } while (userChoice != 3);
-        }catch (Exception e){
-            System.out.println("one numbers");
+        }catch (InputMismatchException e ){
+            System.out.println("one numbers" );
         }
     }
 }

@@ -1,8 +1,9 @@
 public class Employee extends User{
   private Attribute EmployeeLevel;
 
-  public Employee(String userName, String password, String lastName, String firstName, Attribute employeeLevel) {
-    super(userName, password, lastName, firstName);
+  public Employee(String userName, String password, String lastName, String firstName,
+                  Attribute employeeLevel,ShoppingCart shoppingCart,float oldBill) {
+    super(userName, password, lastName, firstName,shoppingCart,oldBill);
     EmployeeLevel = employeeLevel;
   }
 ////

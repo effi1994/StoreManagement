@@ -68,7 +68,7 @@ public class ShoppingCart {
                         *this.products.get(i).getSelectedProduct();
                 totalProduct=sum - (sum *this.products.get(i).getDiscountPrice());
                 total += sum - (sum *this.products.get(i).getDiscountPrice());
-                System.out.println(this.getProducts().get(i) + "\n"
+                System.out.println(this.getProducts().get(i) + "\n" + "Amount : "
                         + this.getProducts().get(i).getSelectedProduct() + "\n"
                         + "price: "  + totalProduct);
             }
@@ -76,36 +76,46 @@ public class ShoppingCart {
             System.out.println("This total price of Products : " + this.getTotalPrice());
 
         }else {
-            this.totalPrice=this.totalPrice();
+            this.totalPrice=this.totalPriceShopping(Attribute.CLIENT);
         }
 
         return this.totalPrice;
     }
 
-    public float totalPriceEmployee(Attribute level){
-        switch (level){
-            case REGULAREMPLOYEE:
-                this.totalPrice= this.totalPrice()-(this.totalPrice()*Finals.EMPLOYEE);
-                break;
-            case MANGER:
-                this.totalPrice= this.totalPrice()-(this.totalPrice()*Finals.MANGER);
-                break;
-            case MEMEBROFMANGEMENTTEAM:
-                this.totalPrice= this.totalPrice()
-                        -(this.totalPrice()*Finals.MEMEBR_OF_MANGEMENT_TEAM);
-                break;
-        }
-        return this.totalPrice;
-    }
 
-    public float totalPrice(){
-        int total=0;
+    public float totalPriceShopping(Attribute level){
+        float total=0;
+        float sum=0;
+        float totalPriceProduct=0;
         this.setTotalPrice(0);
-        for (int i = 0; i < this.getProducts().size(); i++) {
-             total+=this.products.get(i).getPrice()
-                     *this.products.get(i).getSelectedProduct();
-                   System.out.println(this.getProducts().get(i) + "\n"
-                    + this.getProducts().get(i).getSelectedProduct());
+        for (Product product : this.products) {
+            switch (level){
+                case CLIENT:
+                    totalPriceProduct=product.getPrice()*product.getSelectedProduct();
+                    total+=totalPriceProduct;
+
+                    break;
+
+                case REGULAREMPLOYEE:
+                    sum=(product.getPrice()*product.getSelectedProduct())*(Finals.EMPLOYEE);
+                    totalPriceProduct=product.getPrice()*product.getSelectedProduct()-sum;
+                    total+=totalPriceProduct;
+                    break;
+                case MANGER:
+                    sum=(product.getPrice()*product.getSelectedProduct())*(Finals.MANGER);
+                    totalPriceProduct=product.getPrice()*product.getSelectedProduct()-sum;
+                    total+=totalPriceProduct;
+                    break;
+                case MEMEBROFMANGEMENTTEAM:
+                    sum=(product.getPrice()*product.getSelectedProduct())*(Finals.MEMEBR_OF_MANGEMENT_TEAM);
+                    totalPriceProduct=product.getPrice()*product.getSelectedProduct()-sum;
+                    total+=totalPriceProduct;
+                    break;
+            }
+            System.out.println(product + "\n" + "Amount : " +
+                    product.getSelectedProduct() + "\n" +
+                     "Total Price Product : "   + totalPriceProduct);
+
         }
         this.setTotalPrice(total);
         System.out.println(this.getTotalPrice());

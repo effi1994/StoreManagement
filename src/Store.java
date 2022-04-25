@@ -89,12 +89,11 @@ public class Store {
 
                     System.out.println("Are you Membership of our company ?");
                     String answer=scanner.next();
-                    boolean memberShip =false;
-                    if (answer.equals("yes")){
-                       memberShip=true;
-                    }
+                    boolean memberShip = answer.equals("yes");
                     Client newClient= new Client(userName,password,lastname,firstName,memberShip,null,0);
+
                     clients.add(newClient);
+
                     break;
                 case 2:
                     Attribute typeOfEmployee=null;
@@ -250,7 +249,7 @@ public class Store {
                                 totalPrice = shoppingCart.totalPriceClient(client.isMemberShip());
                                 client.setShoppingCart(shoppingCart);
                             }else {
-                                totalPrice = shoppingCart.totalPriceEmployee(this.getSelectEmployee().getEmployeeLevel());
+                                totalPrice = shoppingCart.totalPriceShopping(this.getSelectEmployee().getEmployeeLevel());
                                 this.getSelectEmployee().setShoppingCart(shoppingCart);
                             }
 
@@ -327,13 +326,35 @@ public class Store {
                                  "7-Making a purchase. \n" +
                                  "8- Exit");
             inputEmployee = scanner.nextInt();
+            if (inputEmployee >0){
+                if (inputEmployee <=4){
+                    printClients(inputEmployee);
+                }else {
+                    switch (inputEmployee){
+                        case Finals.ADD_PRODUCT:
+                            addNewProduct();
+                            break;
+                        case Finals.STATUS_PRODUCT:
+                            StatusInventory ();
+                            break;
+                        case Finals.PURCHASE:
+                            this.setSelectEmployee(employee);
+                            purchase(null);
+                            break;
+                    }
+                }
+            }else {
+                System.out.println("Please input only positive numbers");
+            }
+
+
 
         }while (inputEmployee !=8);
     }
 
     public void printClients(int inputEmployee){
         int clientNumber = 1;
-        Client clientHighestRate = null;
+        Client clientHighestRate = new Client("","","","",false,null,0);
         for (Client client : this.clients) {
             switch (inputEmployee) {
                 case Finals.PRINT_ALL_CLIENT:
@@ -353,7 +374,8 @@ public class Store {
                     }
                     break;
                 case Finals.PRINT_HIGHEST_PURCHASE:
-                    if (client.getOldBill() > clientHighestRate.getOldBill() || client.getOldBill() < clientHighestRate.getOldBill()){
+
+                    if (client.getOldBill() > clientHighestRate.getOldBill()){
                         clientHighestRate=client;
                     }
                     break;
@@ -372,10 +394,16 @@ public class Store {
         int productAmount =0;
         float price =0;
         float discountPrice = 0;
+        boolean checkId=false;
         System.out.println("enter name product :");
         nameProduct = scanner.next();
-        System.out.println("enter id product :");
-        idProduct = scanner.nextInt();
+        do{
+            System.out.println("enter id product :");
+            idProduct = scanner.nextInt();
+            checkId=this.checkIsExistProduct(idProduct);
+            System.out.println(checkId? "this id is exist" : "add id");
+        }while (checkId);
+
         System.out.println("enter product amount");
         productAmount = scanner.nextInt();
         System.out.println("enter price");
@@ -400,7 +428,8 @@ public class Store {
         System.out.println("enter if the product exist y/n");
        inventoryProduct=scanner.next();
        this.products.get(this.getIndexProduct()).setInventory(inventoryProduct.equals("y"));
-
     }
+
+
 
 }

@@ -1,6 +1,7 @@
 public enum Attribute {
     REGULAREMPLOYEE,
     MANGER,
-    MEMEBROFMANGEMENTTEAM
-    //
+    MEMEBROFMANGEMENTTEAM,
+    CLIENT
+
 }
