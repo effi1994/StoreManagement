@@ -8,7 +8,6 @@ public class ShoppingCart {
     private int amountOfPurchase;
     private float totalPrice;
 
-
     public ShoppingCart (String lastDatePurchase,int amountOfPurchase,float totalPrice ){
 
         this.lastDatePurchase = lastDatePurchase;
@@ -147,5 +146,4 @@ public class ShoppingCart {
 
     }
 
-//
 }

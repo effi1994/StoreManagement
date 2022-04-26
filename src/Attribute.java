@@ -3,5 +3,4 @@ public enum Attribute {
     MANGER,
     MEMEBROFMANGEMENTTEAM,
     CLIENT
-
 }

@@ -5,17 +5,14 @@ public class Client extends  User {
         this.memberShip = memberShip;
     }
 
-
-///
     public boolean isMemberShip() {
         return memberShip;
     }
 
-    public void setMemberShip(boolean memberShip) {
-        this.memberShip = memberShip;
+    public void myOldBill(float totalPrice){
+        this.setOldBill(totalPrice);
+
     }
-
-
 
     @Override
     public String toString(){

@@ -6,17 +6,14 @@ public class Employee extends User{
     super(userName, password, lastName, firstName,shoppingCart,oldBill);
     EmployeeLevel = employeeLevel;
   }
-////
+
   public Attribute getEmployeeLevel() {
     return EmployeeLevel;
   }
 
-  public void setEmployeeLevel(Attribute employeeLevel) {
-    EmployeeLevel = employeeLevel;
-  }
+
   public void myOldBill(float totalPrice){
     this.setOldBill(totalPrice);
-
   }
 
   @Override
